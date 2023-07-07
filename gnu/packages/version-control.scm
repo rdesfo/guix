@@ -48,6 +48,7 @@
 ;;; Copyright © 2022 Dhruvin Gandhi <contact@dhruvin.dev>
 ;;; Copyright © 2015, 2022 David Thompson <davet@gnu.org>
 ;;; Copyright © 2023 Nicolas Graves <ngraves@ngraves.fr>
+;;; Copyright © 2023 Ryan Desfosses <rdesfo@sdf.org>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -3629,3 +3630,36 @@ create and manage trackers, tickets
 interact with GraphQL APIs directly
 @end table")
     (license license:agpl3)))
+
+(define-public git-issue
+  (let ((commit "4d2bc4173bf803d74bf2ae54f892bd08754f1b48")
+        (revision "0"))
+    (package
+    (name "git-issue")
+    (version (git-version "4d2bc41" revision commit))
+    (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                      (url "https://github.com/dspinellis/git-issue")
+                      (commit commit)))
+              (sha256
+               (base32
+                "0jmx8wjvvxkd3y5im2h96d13dnbpds66djf96b6s23jwfbr7dlsz"))))
+    (build-system gnu-build-system)
+    (arguments
+     `(#:phases
+       (modify-phases %standard-phases
+         (add-after 'unpack 'patch-installation-target
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let ((out (assoc-ref outputs "out")))
+               (substitute* "Makefile"
+                (("/usr") out)))))
+         (delete 'configure)
+         (delete 'check))))
+    (inputs (list jq curl))
+    (synopsis "Git-based decentralized issue management")
+    (description "This is a minimalist decentralized issue management system
+based on Git, offering (optional) biderectional integration with GitHub and
+GitLab issue management.  It has the following advantages over other systems.")
+    (home-page "https://github.com/dspinellis/git-issue")
+    (license license:gpl3+))))
