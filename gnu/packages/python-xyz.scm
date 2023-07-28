@@ -33343,6 +33343,22 @@ package.  It can be used by type-checking tools like mypy, PyCharm, pytype
 etc. to check code that uses @code{orjson}.")
     (license license:asl2.0)))
 
+(define-public python-types-python-dateutil
+  (package
+    (name "python-types-python-dateutil")
+    (version "2.8.19.13")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "types-python-dateutil" version))
+              (sha256
+               (base32
+                "0kqk76wjr939qfn47k311cpc978v7lnfs43735lcwcgfjmgjg809"))))
+    (build-system python-build-system)
+    (home-page "https://github.com/python/typeshed")
+    (synopsis "Typing stubs for python-dateutil")
+    (description "Typing stubs for python-dateutil")
+    (license license:asl2.0)))
+
 (define-public python-nanoid
   ;; There are no tests on PyPi.
   (let ((commit "061f9a598f310b0e2e91b9ed6ce725a22770da64")
