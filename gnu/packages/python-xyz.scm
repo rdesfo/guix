@@ -27915,6 +27915,23 @@ evolved from its precursor @code{overtest}.")
 HTML-containing files.")
     (license license:bsd-3)))
 
+(define-public python-pytest-fail-slow
+  (package
+    (name "python-pytest-fail-slow")
+    (version "0.3.0")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "pytest-fail-slow" version))
+              (sha256
+               (base32
+                "0754ivpy272jni0bp5p3ba9y8mbqksylbzsdglz7w2qp9wzjy0mw"))))
+    (build-system pyproject-build-system)
+    (propagated-inputs (list python-pytest))
+    (home-page "https://github.com/jwodder/pytest-fail-slow")
+    (synopsis "Fail tests that take too long to run")
+    (description "Fail tests that take too long to run")
+    (license license:expat)))
+
 (define-public python-json5
   (package
     (name "python-json5")
@@ -33358,6 +33375,7 @@ etc. to check code that uses @code{orjson}.")
     (synopsis "Typing stubs for python-dateutil")
     (description "Typing stubs for python-dateutil")
     (license license:asl2.0)))
+
 
 (define-public python-nanoid
   ;; There are no tests on PyPi.
