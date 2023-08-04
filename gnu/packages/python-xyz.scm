@@ -1141,6 +1141,22 @@ Python dictionaries and provides a syntax to access nested dictionaries values
 using a dot syntax, for example: @code{dictionary['deeply.nested.key']}.")
     (license license:expat)))
 
+(define-public python-gprof2dot
+  (package
+    (name "python-gprof2dot")
+    (version "2022.7.29")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "gprof2dot" version))
+              (sha256
+               (base32
+                "1i9y2d1vl4av8hwwvmh4phd7lgvpibc3y72iz768yq1npncd5d25"))))
+    (build-system pyproject-build-system)
+    (home-page "https://github.com/jrfonseca/gprof2dot")
+    (synopsis "Generate a dot graph from the output of several profilers.")
+    (description "Generate a dot graph from the output of several profilers.")
+    (license license:gpl3+)))
+
 (define-public python-twodict
   (package
     (name "python-twodict")
