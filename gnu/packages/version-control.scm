@@ -60,6 +60,7 @@
 ;;; Copyright © 2024 Ashish SHUKLA <ashish.is@lostca.se>
 ;;; Copyright © 2024 Wilko Meyer <w@wmeyer.eu>
 ;;; Copyright © 2025 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+;;; Copyright © 2023 Ryan Desfosses <rdesfo@sdf.org>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -94,6 +95,7 @@
   #:use-module (guix build-system pyproject)
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt)
+  #:use-module (guix build-system pyproject)
   #:use-module (guix build-system trivial)
   #:use-module (gnu packages apr)
   #:use-module (gnu packages autotools)
@@ -2465,6 +2467,25 @@ interface.")
     (description "Evolve is a Mercurial extension for faster and safer mutable
 history.  It implements the changeset evolution concept for Mercurial.")
     (license license:gpl2)))
+
+(define-public python-hglib
+  (package
+    (name "python-hglib")
+    (version "2.6.2")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "python-hglib" version))
+              (sha256
+               (base32
+                "0256inr8ph4j121skv2a1n9lxdkjpgb6mmhlaxyya3n9agnx32xi"))))
+    (build-system pyproject-build-system)
+    (arguments
+     ;; Tests need mercurial source code.
+     '(#:tests? #f))
+    (home-page "https://www.mercurial-scm.org/wiki/PythonHglibs")
+    (synopsis "Mercurial Python library")
+    (description "Mercurial Python library")
+    (license license:expat)))
 
 (define-public hg-commitsigs
   ;; Latest tag is 11 years old.
