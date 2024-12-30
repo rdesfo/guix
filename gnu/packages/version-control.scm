@@ -770,6 +770,31 @@ everything from small to very large projects with speed and efficiency.")
                (base32
                 "0h40arw08xbpi2cbf7pvc947v963rjxz3inb2ar81zjc8byvlj77"))))))
 
+(define-public go-github-com-go-viper-mapstructure
+  (package
+    (name "go-github-com-go-viper-mapstructure")
+    (version "2.2.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/go-viper/mapstructure")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1x13x2s0vkikmn5wcarxskhr6c90s64nkbsgjsh7g9sh4v31n5yw"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/go-viper/mapstructure"))
+
+    (synopsis "mapstructure")
+    (description
+     "Package mapstructure exposes functionality to convert one arbitrary Go type into
+another, typically to convert a map[string]interface{} into a native Go
+structure.")
+    (license license:expat)))
+
 (define-public python-klaus
   (package
     (name "python-klaus")
