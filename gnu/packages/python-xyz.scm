@@ -39107,6 +39107,23 @@ path.")
 Jinja2.")
     (license (list license:gpl3+ license:expat))))
 
+(define-public python-types-python-dateutil
+  (package
+    (name "python-types-python-dateutil")
+    (version "2.9.0.20241206")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "types_python_dateutil" version))
+       (sha256
+        (base32 "1jw4f9vb613aspivy7ih8qk50k0mgbm9ydkj59lvmzr69i0r7x0q"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list python-setuptools python-wheel))
+    (home-page "https://github.com/python/typeshed")
+    (synopsis "Typing stubs for python-dateutil")
+    (description "Typing stubs for python-dateutil.")
+    (license #f)))
+
 (define-public python-pymonad
   (package
     (name "python-pymonad")
