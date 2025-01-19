@@ -38919,6 +38919,44 @@ for persistent data structures.  It was written initially to support replacing
     (description "Typing stubs for python-dateutil")
     (license license:asl2.0)))
 
+(define-public python-scriv
+  (package
+    (name "python-scriv")
+    (version "1.5.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "scriv" version))
+       (sha256
+        (base32 "1dij1g00vi2fnmajjr376y1b7wa2jlviskjc777y1y24s7w9zbih"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:tests? #t
+       #:phases
+       (modify-phases %standard-phases
+         (add-after 'unpack 'disable-specific-tests
+           (lambda _ ;; Disable specific tests here, e.g., by patching test files or configuration.
+             (substitute* "tests/test_gitinfo.py"
+               (("def test_real_get_github_repos") "def skip_test_real_get_github_repos"))
+             #t)))))
+    (propagated-inputs (list python-attrs
+                             python-click
+                             python-click-log
+                             python-jinja2
+                             python-markdown-it-py
+                             python-requests))
+    (native-inputs (list python-setuptools
+                         python-wheel
+                         python-pytest
+                         python-freezegun
+                         python-responses
+                         git
+                         pandoc
+                         python-mocker))
+    (home-page "https://github.com/nedbat/scriv")
+    (synopsis "Scriv changelog management tool")
+    (description "Scriv changelog management tool.")
+    (license license:asl2.0)))
 
 (define-public python-nanoid
   ;; There are no tests on PyPi.
