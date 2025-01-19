@@ -38919,6 +38919,25 @@ for persistent data structures.  It was written initially to support replacing
     (description "Typing stubs for python-dateutil")
     (license license:asl2.0)))
 
+(define-public python-mocker
+  (package
+    (name "python-mocker")
+    (version "1.1.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "mocker" version))
+       (sha256
+        (base32 "0699rxgjilzs9sxvgd3m6jwzqibyf4j556wmr6yjhjy70wbr2290"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list python-setuptools python-wheel))
+    (home-page "http://labix.org/mocker")
+    (synopsis
+     "Graceful platform for test doubles in Python (mocks, stubs, fakes, and dummies).")
+    (description
+     "Graceful platform for test doubles in Python (mocks, stubs, fakes, and dummies).")
+    (license license:bsd-3)))
+
 (define-public python-scriv
   (package
     (name "python-scriv")
